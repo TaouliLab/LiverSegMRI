@@ -19,7 +19,7 @@ This repository contains the inference code, the code used to run the comparator
 | Test set | Patients | LiverSegMRI | TotalSegmentator MRI | MRAnnotator |
 |---|---:|---:|---:|---:|
 | External (Duke Liver Dataset, CirrMRI600+) | 487 | **0.944** | 0.886 | 0.889 |
-| Internal (held out) | 188 | **0.984** | 0.728 | 0.760 |
+| Internal (held out) | 188 | **0.985** | 0.880 | 0.894 |
 
 *Patient-wise mean Dice similarity coefficient. See the paper for boundary metrics, volume error, and sequence-wise and subgroup analyses.*
 
