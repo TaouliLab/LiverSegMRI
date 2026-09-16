@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+.ipynb_checkpoints/
+
+# Data, weights, and outputs (never commit images, masks, or model files)
+data/
+weights/
+outputs/
+results/
+nnUNet_raw/
+nnUNet_preprocessed/
+nnUNet_results/
+*.nii
+*.nii.gz
+*.nrrd
+*.mha
+*.mhd
+*.dcm
+*.pth
+*.pt

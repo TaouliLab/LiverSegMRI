@@ -1,0 +1,56 @@
+cff-version: 1.2.0
+message: "If you use LiverSegMRI, please cite the article below."
+title: "LiverSegMRI"
+version: 1.0.0
+doi: 10.5281/zenodo.XXXXXXX
+license: CC-BY-NC-4.0
+repository-code: "https://github.com/TaouliLab/LiverSegMRI"
+url: "https://huggingface.co/TaouliLab/LiverSegMRI"
+authors:
+  - family-names: Yuce
+    given-names: Murat
+  - family-names: Tordjman
+    given-names: Mickael
+  - family-names: Meribout
+    given-names: Anis
+  - family-names: Ozkaya
+    given-names: Efe
+  - family-names: Lee
+    given-names: Jung-Oh
+  - family-names: Lee
+    given-names: Jeong Min
+  - family-names: "Akinci D'Antonoli"
+    given-names: Tugba
+  - family-names: Wasserthal
+    given-names: Jakob
+  - family-names: Mei
+    given-names: Xueyan
+  - family-names: Taouli
+    given-names: Bachir
+preferred-citation:
+  type: article
+  title: "LiverSegMRI: Development and External Validation of a Deep Learning Model for Automated Liver Segmentation across Multiparametric MRI Sequences and Comparison with Generalist Segmentation Models"
+  journal: "Radiology: Artificial Intelligence"
+  year: 2026
+  doi: 10.1148/ryai.XXXXXXX
+  authors:
+    - family-names: Yuce
+      given-names: Murat
+    - family-names: Tordjman
+      given-names: Mickael
+    - family-names: Meribout
+      given-names: Anis
+    - family-names: Ozkaya
+      given-names: Efe
+    - family-names: Lee
+      given-names: Jung-Oh
+    - family-names: Lee
+      given-names: Jeong Min
+    - family-names: "Akinci D'Antonoli"
+      given-names: Tugba
+    - family-names: Wasserthal
+      given-names: Jakob
+    - family-names: Mei
+      given-names: Xueyan
+    - family-names: Taouli
+      given-names: Bachir

@@ -1,0 +1,3 @@
+case_id,patient_id,sequence,test_set,reference,pred_LiverSegMRI,pred_TotalSegmentatorMRI,pred_MRAnnotator
+P0001-pvp,P0001,pvp,external,/path/to/data/site_a/P0001/pvp_mask.nii.gz,/path/to/predictions/liversegmri/pvp_liver.nii.gz,/path/to/predictions/totalsegmentator/pvp_liver.nii.gz,/path/to/predictions/mrannotator/pvp_liver.nii.gz
+P0001-t2,P0001,t2,external,/path/to/data/site_a/P0001/t2_mask.nii.gz,/path/to/predictions/liversegmri/t2_liver.nii.gz,/path/to/predictions/totalsegmentator/t2_liver.nii.gz,/path/to/predictions/mrannotator/t2_liver.nii.gz

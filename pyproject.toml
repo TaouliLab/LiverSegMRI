@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "liversegmri"
+version = "1.0.0"
+description = "Sequence-agnostic whole-liver segmentation on abdominal MRI (nnU-Net v2)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "CC-BY-NC-4.0" }
+authors = [{ name = "The LiverSegMRI authors" }]
+keywords = ["MRI", "liver", "segmentation", "deep learning", "nnU-Net"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Medical Science Apps.",
+]
+dependencies = [
+    "nnunetv2>=2.5,<2.7",
+    "SimpleITK>=2.3",
+    "nibabel>=5.0",
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "pandas>=2.0",
+    "huggingface_hub>=0.23",
+    "iterative-stratification>=0.1.7",
+]
+
+[project.optional-dependencies]
+comparators = ["TotalSegmentator==2.12.0"]
+
+[project.scripts]
+liversegmri = "liversegmri.cli:main"
+
+[project.urls]
+Paper = "https://doi.org/10.1148/ryai.XXXXXXX"
+Model = "https://huggingface.co/TaouliLab/LiverSegMRI"
+Archive = "https://doi.org/10.5281/zenodo.XXXXXXX"
+Source = "https://github.com/TaouliLab/LiverSegMRI"
+
+[tool.setuptools.packages.find]
+include = ["liversegmri*"]
