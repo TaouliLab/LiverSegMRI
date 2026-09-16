@@ -2,10 +2,11 @@
 
 **Sequence-agnostic whole-liver segmentation on abdominal MRI**
 
-[![Paper](https://img.shields.io/badge/Paper-Radiology%3A%20Artificial%20Intelligence-1f4e79)](https://doi.org/10.1148/ryai.XXXXXXX)
 [![Model on Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-LiverSegMRI-ffcc4d)](https://huggingface.co/TaouliLab/LiverSegMRI)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX)
 [![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
+
+> **Publication status.** The associated manuscript is under review. The journal reference, DOI, archive DOI and
+> full citation will be added here once the article is published.
 
 LiverSegMRI is a deep learning model for automated whole-liver segmentation on routine abdominal MRI. It is a five-fold nnU-Net v2 ensemble trained on 10,494 sequences from 1,058 patients with and without chronic liver disease. Each sequence is used as an independent single-channel input, so the same model segments T1-weighted in- and opposed-phase, pre- and post-contrast dynamic, hepatobiliary, T2-weighted, diffusion-weighted, and ADC images without sequence labels.
 
@@ -13,7 +14,7 @@ This repository contains the inference code, the code used to run the comparator
 
 > Yuce M, Tordjman M, Meribout A, Ozkaya E, Lee JO, Lee JM, Akinci D'Antonoli T, Wasserthal J, Mei X, Taouli B.
 > **LiverSegMRI: Development and External Validation of a Deep Learning Model for Automated Liver Segmentation across Multiparametric MRI Sequences and Comparison with Generalist Segmentation Models.**
-> *Radiology: Artificial Intelligence* 2026. doi: [10.1148/ryai.XXXXXXX](https://doi.org/10.1148/ryai.XXXXXXX)
+> Manuscript under review; journal, year and DOI to be added after publication.
 
 | Test set | Patients | LiverSegMRI | TotalSegmentator MRI | MRAnnotator |
 |---|---:|---:|---:|---:|
@@ -225,13 +226,15 @@ Institutional data are not publicly available.
 
 ## Citation
 
+The article is not yet published. Until it is, please cite this repository; the journal, year and DOI below will be
+completed after publication.
+
 ```bibtex
-@article{yuce2026liversegmri,
-  title   = {LiverSegMRI: Development and External Validation of a Deep Learning Model for Automated Liver Segmentation across Multiparametric MRI Sequences and Comparison with Generalist Segmentation Models},
-  author  = {Yuce, Murat and Tordjman, Mickael and Meribout, Anis and Ozkaya, Efe and Lee, Jung-Oh and Lee, Jeong Min and Akinci D'Antonoli, Tugba and Wasserthal, Jakob and Mei, Xueyan and Taouli, Bachir},
-  journal = {Radiology: Artificial Intelligence},
-  year    = {2026},
-  doi     = {10.1148/ryai.XXXXXXX}
+@misc{liversegmri,
+  title  = {LiverSegMRI: Development and External Validation of a Deep Learning Model for Automated Liver Segmentation across Multiparametric MRI Sequences and Comparison with Generalist Segmentation Models},
+  author = {Yuce, Murat and Tordjman, Mickael and Meribout, Anis and Ozkaya, Efe and Lee, Jung-Oh and Lee, Jeong Min and Akinci D'Antonoli, Tugba and Wasserthal, Jakob and Mei, Xueyan and Taouli, Bachir},
+  note   = {Manuscript under review; journal, year and DOI to be added after publication},
+  url    = {https://github.com/TaouliLab/LiverSegMRI}
 }
 ```
 

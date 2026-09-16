@@ -34,9 +34,7 @@ comparators = ["TotalSegmentator==2.12.0"]
 liversegmri = "liversegmri.cli:main"
 
 [project.urls]
-Paper = "https://doi.org/10.1148/ryai.XXXXXXX"
 Model = "https://huggingface.co/TaouliLab/LiverSegMRI"
-Archive = "https://doi.org/10.5281/zenodo.XXXXXXX"
 Source = "https://github.com/TaouliLab/LiverSegMRI"
 
 [tool.setuptools.packages.find]
