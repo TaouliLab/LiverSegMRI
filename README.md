@@ -42,6 +42,25 @@ ADC = apparent diffusion coefficient, AP = arterial phase, DWI = diffusion-weigh
 phase, HBP = hepatobiliary phase, PVP = portal venous phase, T1W = T1-weighted, T2W = T2-weighted, TP/DP =
 transitional/delayed phase.
 
+### Representative segmentations
+
+![Liver contours from the manual reference and the three models on three MRI sequences, with Dice values](figures/figure4_qualitative_examples.jpg)
+
+Three examinations, one per row, each shown with the manual reference (red) and the three models: LiverSegMRI
+(blue), TotalSegmentator MRI (orange) and MRAnnotator (teal). Dice for that case is printed in each panel.
+
+- **A–D, portal venous phase T1-weighted imaging.** All three models find the liver, and the differences are at the
+  boundary: both comparators leak across the interlobar fissure into the stomach and spleen region, and
+  TotalSegmentator MRI adds a spurious component outside the liver (0.93 vs 0.84 and 0.84).
+- **E–H, T2-weighted imaging.** The liver is dark against a bright spleen. LiverSegMRI follows the contour closely,
+  while both comparators under-segment the dome and the left lobe (0.96 vs 0.74 and 0.75).
+- **I–L, diffusion-weighted imaging.** The lowest-resolution sequence of the three. LiverSegMRI reproduces the
+  reference almost exactly, TotalSegmentator MRI misses the posterior right lobe, and MRAnnotator fragments inside
+  the parenchyma (0.98 vs 0.68 and 0.79).
+
+The pattern matches the quantitative result above: the models agree most on high-resolution contrast-enhanced
+T1-weighted imaging and diverge on T2-weighted and diffusion-weighted acquisitions.
+
 ---
 
 ## Contents
