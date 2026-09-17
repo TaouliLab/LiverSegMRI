@@ -39,3 +39,6 @@ Source = "https://github.com/TaouliLab/LiverSegMRI"
 
 [tool.setuptools.packages.find]
 include = ["liversegmri*"]
+
+[tool.setuptools.package-data]
+liversegmri = ["resources/*.csv"]

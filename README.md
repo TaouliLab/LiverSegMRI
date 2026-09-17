@@ -64,11 +64,14 @@ LiverSegMRI/
 │   ├── inference.py      # LiverSegMRI prediction (weights downloaded from Hugging Face)
 │   ├── comparators.py    # TotalSegmentator MRI and MRAnnotator liver masks, as run in the study
 │   ├── orientation.py    # slice-order check for datasets whose headers disagree with the image
+│   ├── datasets.py       # converters for the public datasets into the layout used here
 │   ├── data.py           # nnU-Net dataset preparation and patient-level split
 │   ├── metrics.py        # Dice, HD95, ASSD, volume error
 │   ├── evaluation.py     # metrics for a manifest of cases
 │   ├── statistics.py     # patient-level paired analysis, bootstrap CIs, Holm correction
-│   └── cli.py            # `liversegmri` command-line interface
+│   ├── cli.py            # `liversegmri` command-line interface
+│   └── resources/
+│       └── lld_mmri_slice_order.csv   # per-case LLD-MMRI slice order used in this study
 ├── examples/
 │   └── manifest_template.csv
 ├── pyproject.toml
@@ -142,6 +145,24 @@ Optional subgroup table for stratified splitting (`subgroups.csv`):
 source,patient_id,cirrhotic_appearance,irregular_liver_borders,prior_hepatic_resection,left_lobe_extension,exophytic_lesion,presence_of_ascites
 ```
 
+Each public dataset is distributed in its own layout. `liversegmri convert` rewrites them into the layout above,
+using the sequence names used throughout the paper (`pvp`, `t2`, `pre`, `in`, `out`):
+
+```bash
+# CirrMRI600+ — NIfTI volumes split across train/valid/test folders, plus the healthy subjects
+liversegmri convert cirrmri600 --root /path/to/CirrMRI600 -o /path/to/data/CirrMRI600
+
+# Duke Liver Dataset — DICOM series indexed by SegmentationKey.csv and SequenceTypes.csv
+liversegmri convert duke --root /path/to/DukeData -o /path/to/data/Duke
+```
+
+Both write `<case_id>/<sequence>.nrrd` alongside `<case_id>/<sequence>_LiverSegManual.seg.nrrd`, so pass
+`--mask-suffix _LiverSegManual.seg` to `prepare-nnunet` when building a dataset from these folders. Masks are
+binarized, and a Duke mask with more than two levels raises rather than being silently thresholded.
+
+LLD-MMRI is distributed as one NIfTI per sequence per case and needs no conversion, but its slice order does need
+checking before the comparators are run — see [section 5](#5-slice-order-of-public-datasets).
+
 ### 2. Build the nnU-Net dataset
 
 ```bash
@@ -208,6 +229,19 @@ The check uses no reference masks: it runs a fast multi-organ pass and compares 
 structures with that of pelvic structures, which is positive when the slice order matches the header and negative
 when it is reversed. A few volumes of the examination vote. If a volume is corrected, reverse the model's output
 back to the original grid before scoring, so that metrics stay on the reference mask's geometry.
+
+The decisions this study made for LLD-MMRI are published here, so the same set of examinations can be reproduced
+without re-running the detector:
+
+```bash
+liversegmri lld-slice-order                       # print the table
+liversegmri lld-slice-order -o slice_order.csv    # or write it to CSV
+```
+
+[`liversegmri/resources/lld_mmri_slice_order.csv`](liversegmri/resources/lld_mmri_slice_order.csv) lists the 75
+LLD-MMRI examinations used here by their case ID: 63 are stored with a reversed slice order and 12 as stored.
+`sequences_voting` is how many sequences of that examination carried a usable cue, so a case decided on three
+sequences is more strongly supported than one decided on a single sequence.
 
 ### 6. Evaluation
 

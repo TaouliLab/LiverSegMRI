@@ -1,4 +1,5 @@
-"""Command-line interface: `liversegmri {predict, comparator, prepare-nnunet, evaluate, analyze}`."""
+"""Command-line interface: `liversegmri {predict, comparator, check-orientation, convert, lld-slice-order,
+prepare-nnunet, evaluate, analyze}`."""
 
 from __future__ import annotations
 
@@ -47,6 +48,33 @@ def _orientation(args):
     print("slice order is REVERSED relative to the header" if result["reversed"] else "slice order matches the header")
     if result.get("written"):
         print(f"Wrote {len(result['written'])} corrected volumes to {args.output}")
+
+
+def _convert(args):
+    from . import datasets
+
+    convert = {"cirrmri600": datasets.convert_cirrmri600, "duke": datasets.convert_duke}[args.dataset]
+    written = convert(Path(args.root), Path(args.output), overwrite=args.overwrite)
+    print(f"Wrote {written} series to {args.output}")
+
+
+def _lld_slice_order(args):
+    import csv
+
+    from .datasets import lld_mmri_slice_order
+
+    rows = lld_mmri_slice_order()
+    n_reversed = sum(r["slice_order_reversed"] for r in rows)
+    if args.output:
+        with open(args.output, "w", newline="", encoding="utf-8") as fh:
+            writer = csv.DictWriter(fh, fieldnames=list(rows[0]))
+            writer.writeheader()
+            writer.writerows(rows)
+        print(f"Wrote {len(rows)} cases to {args.output}")
+    else:
+        for r in rows:
+            print(f"{r['case_id']}\t{'reversed' if r['slice_order_reversed'] else 'as stored'}")
+    print(f"{n_reversed} of {len(rows)} examinations are stored with a reversed slice order")
 
 
 def _prepare(args):
@@ -129,6 +157,17 @@ def main(argv=None):
     p.add_argument("--sample", type=int, default=3, help="volumes used to decide (default 3)")
     p.add_argument("--device", default="cuda", choices=["cuda", "cpu"])
     p.set_defaults(func=_orientation)
+
+    p = sub.add_parser("convert", help="convert a public dataset into the per-examination layout used here")
+    p.add_argument("dataset", choices=["cirrmri600", "duke"])
+    p.add_argument("--root", required=True, help="the dataset as distributed by its providers")
+    p.add_argument("-o", "--output", required=True, help="destination for <case_id>/<sequence>.nrrd")
+    p.add_argument("--overwrite", action="store_true", help="replace files that already exist")
+    p.set_defaults(func=_convert)
+
+    p = sub.add_parser("lld-slice-order", help="per-case LLD-MMRI slice-order decisions used in this study")
+    p.add_argument("-o", "--output", help="write the table to this CSV instead of printing it")
+    p.set_defaults(func=_lld_slice_order)
 
     p = sub.add_parser("prepare-nnunet", help="build the nnU-Net v2 training/test dataset")
     p.add_argument("--data-root", required=True, help="folder with <source>/<patient_id>/<sequence> images and masks")
