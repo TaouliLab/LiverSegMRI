@@ -23,6 +23,25 @@ This repository contains the inference code, the code used to run the comparator
 
 *Patient-wise mean Dice similarity coefficient. See the paper for boundary metrics, volume error, and sequence-wise and subgroup analyses.*
 
+### Performance across sequence types and liver morphology
+
+![Patient-wise Dice of LiverSegMRI, TotalSegmentator MRI and MRAnnotator across MRI sequence types and morphologic subgroups, in the internal and external test sets](figures/figure3_performance_by_sequence_and_subgroup.png)
+
+Radar plots of patient-wise mean Dice for the three models, by MRI sequence type (**A**, internal test; **B**, external
+test) and by morphologic subgroup (**C**, internal; **D**, external). Each axis is one sequence type or subgroup, and
+the values under each plot list the models in the same order as the axes. LiverSegMRI encloses both comparators on
+every axis.
+
+The gap widens on the functional sequences. Relative to conventional T1-weighted phases, Dice falls by 0.011 on DWI
+and 0.016 on ADC for LiverSegMRI, against 0.071 and 0.085 for TotalSegmentator MRI and 0.181 and 0.145 for
+MRAnnotator — sequences that are lower in resolution and less represented in general-purpose training data. Subgroup
+performance (**C**, **D**) stays close to the whole-cohort level for LiverSegMRI in cirrhosis, irregular borders,
+prior resection, left lobe extension, exophytic lesions and ascites.
+
+ADC = apparent diffusion coefficient, AP = arterial phase, DWI = diffusion-weighted imaging, EAP = early arterial
+phase, HBP = hepatobiliary phase, PVP = portal venous phase, T1W = T1-weighted, T2W = T2-weighted, TP/DP =
+transitional/delayed phase.
+
 ---
 
 ## Contents
