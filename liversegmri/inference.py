@@ -31,11 +31,16 @@ def list_images(path: str | Path) -> list[Path]:
 
 
 def download_weights(repo_id: str = HF_REPO_ID, revision: str | None = None, cache_dir: str | None = None) -> Path:
-    """Download the model folder (dataset.json, plans.json, fold_*/checkpoint_final.pth) from Hugging Face."""
+    """Download the model folder (config.json, dataset.json, plans.json, fold_*/checkpoint_final.pth) from Hugging Face.
+
+    config.json describes the model and is also the file the Hub counts to report download statistics, so it is
+    fetched alongside the weights rather than left in the repository unread.
+    """
     from huggingface_hub import snapshot_download
 
     return Path(snapshot_download(repo_id=repo_id, revision=revision, cache_dir=cache_dir,
-                                  allow_patterns=["dataset.json", "plans.json", "fold_*/checkpoint_final.pth"]))
+                                  allow_patterns=["config.json", "dataset.json", "plans.json",
+                                                  "fold_*/checkpoint_final.pth"]))
 
 
 def keep_largest_component(mask: np.ndarray) -> np.ndarray:
