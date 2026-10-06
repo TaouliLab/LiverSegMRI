@@ -13,7 +13,7 @@ LiverSegMRI is a deep learning model for automated whole-liver segmentation on r
 This repository contains the inference code, the code used to run the comparator models, the evaluation metrics, and the statistical analysis of the study:
 
 > Yuce M, Tordjman M, Meribout A, Ozkaya E, Lee JO, Lee JM, Akinci D'Antonoli T, Wasserthal J, Mei X, Taouli B.
-> **LiverSegMRI: Development and External Validation of a Deep Learning Model for Automated Liver Segmentation across Multiparametric MRI Sequences and Comparison with Generalist Segmentation Models.**
+> **LiverSegMRI: Development and External Validation of a Deep Learning Model for Automated Liver Segmentation across Multiparametric MRI Sequences and Comparison with Public Multi-Organ Segmentation Models.**
 > Manuscript under review; journal, year and DOI to be added after publication.
 
 | Test set | Patients | LiverSegMRI | TotalSegmentator MRI | MRAnnotator |
@@ -27,16 +27,15 @@ This repository contains the inference code, the code used to run the comparator
 
 ![Patient-wise Dice of LiverSegMRI, TotalSegmentator MRI and MRAnnotator across MRI sequence types and morphologic subgroups, in the internal and external test sets](figures/figure3_performance_by_sequence_and_subgroup.png)
 
-Radar plots of patient-wise mean Dice for the three models, by MRI sequence type (**A**, internal test; **B**, external
-test) and by morphologic subgroup (**C**, internal; **D**, external). Each axis is one sequence type or subgroup, and
-the values under each plot list the models in the same order as the axes. LiverSegMRI encloses both comparators on
-every axis.
+Radar plots of patient-wise mean Dice for the three models, by MRI sequence type (top) and by morphologic subgroup
+(bottom), in the internal (left) and external (right) test sets. Each axis is one sequence type or subgroup.
+LiverSegMRI encloses both comparators on every axis. The external early arterial phase is omitted because it contained
+a single examination.
 
-The gap widens on the functional sequences. Relative to conventional T1-weighted phases, Dice falls by 0.011 on DWI
-and 0.016 on ADC for LiverSegMRI, against 0.071 and 0.085 for TotalSegmentator MRI and 0.181 and 0.145 for
-MRAnnotator — sequences that are lower in resolution and less represented in general-purpose training data. Subgroup
-performance (**C**, **D**) stays close to the whole-cohort level for LiverSegMRI in cirrhosis, irregular borders,
-prior resection, left lobe extension, exophytic lesions and ascites.
+Relative to conventional T1-weighted phases, Dice falls by 0.011 on DWI and 0.016 on ADC for LiverSegMRI, against
+0.071 and 0.085 for TotalSegmentator MRI and 0.181 and 0.145 for MRAnnotator. Subgroup performance (bottom row) stays
+close to the whole-cohort level for LiverSegMRI in cirrhosis, irregular borders, prior resection, left lobe extension,
+exophytic lesions and ascites.
 
 ADC = apparent diffusion coefficient, AP = arterial phase, DWI = diffusion-weighted imaging, EAP = early arterial
 phase, HBP = hepatobiliary phase, PVP = portal venous phase, T1W = T1-weighted, T2W = T2-weighted, TP/DP =
@@ -216,7 +215,7 @@ liversegmri comparator mrannotator -i /path/to/images -o /path/to/predictions/mr
 ### 5. Slice order of public datasets
 
 Some public collections are distributed with an identity direction matrix while the slices actually run
-superior→inferior, opposite to the header. Generalist models that rely on anatomical orientation then segment an
+superior→inferior, opposite to the header. Multi-organ models that rely on anatomical orientation then segment an
 inverted abdomen and fail, often without any obvious error; LiverSegMRI is insensitive to it. The order is not
 wrong for every examination in a collection, so check per examination before running comparators:
 
@@ -296,7 +295,7 @@ completed after publication.
 
 ```bibtex
 @misc{liversegmri,
-  title  = {LiverSegMRI: Development and External Validation of a Deep Learning Model for Automated Liver Segmentation across Multiparametric MRI Sequences and Comparison with Generalist Segmentation Models},
+  title  = {LiverSegMRI: Development and External Validation of a Deep Learning Model for Automated Liver Segmentation across Multiparametric MRI Sequences and Comparison with Public Multi-Organ Segmentation Models},
   author = {Yuce, Murat and Tordjman, Mickael and Meribout, Anis and Ozkaya, Efe and Lee, Jung-Oh and Lee, Jeong Min and Akinci D'Antonoli, Tugba and Wasserthal, Jakob and Mei, Xueyan and Taouli, Bachir},
   note   = {Manuscript under review; journal, year and DOI to be added after publication},
   url    = {https://github.com/TaouliLab/LiverSegMRI}
