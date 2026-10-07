@@ -192,7 +192,7 @@ for FOLD in 0 1 2 3 4; do
 done
 ```
 
-In the study, each fold was trained for 1,000 epochs on one NVIDIA A100 (40 GB), taking about 45 hours per fold. Inference uses the ensemble of the five final checkpoints without test-time mirroring, followed by largest-connected-component filtering.
+In the study, each fold was trained for 1,000 epochs on one NVIDIA V100 (16 GB), taking about 45 hours per fold. Inference uses the ensemble of the five final checkpoints without test-time mirroring, followed by largest-connected-component filtering.
 
 ### 4. Comparator models
 
