@@ -29,8 +29,7 @@ This repository contains the inference code, the code used to run the comparator
 
 Radar plots of patient-wise mean Dice for the three models, by MRI sequence type (top) and by morphologic subgroup
 (bottom), in the internal (left) and external (right) test sets. Each axis is one sequence type or subgroup.
-LiverSegMRI encloses both comparators on every axis. The external early arterial phase is omitted because it contained
-a single examination.
+LiverSegMRI encloses both comparators on every axis.
 
 Relative to conventional T1-weighted phases, Dice falls by 0.011 on DWI and 0.016 on ADC for LiverSegMRI, against
 0.071 and 0.085 for TotalSegmentator MRI and 0.181 and 0.145 for MRAnnotator. Subgroup performance (bottom row) stays
